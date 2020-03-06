@@ -1,11 +1,21 @@
 import React from 'react';
 import './App.css';
+import Header from './components/Header.js';
+import Pledge from './components/Pledge.js';
+import Footer from './components/Footer.js';
 
 function App() {
   return (
-    <div className='container'>
-      <h1>planet pledge</h1>
-      <h3>saving the world, one plastic bottle at a time</h3>
+    <div className='app'>
+      <Header />
+      <div id="pledge-container">
+        <Pledge />
+        <Pledge />
+        <Pledge />
+        <Pledge />
+        <Pledge />
+      </div>
+      <Footer />
     </div>
   );
 }

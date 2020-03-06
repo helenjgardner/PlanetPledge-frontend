@@ -2,13 +2,81 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: sans-serif;
-  font-weight: 400;
 }
 
-.container {
+.app {
   background-color: rgb(195, 231, 78);
   width: 75vw;
+  height: 100vh;
   margin: 0 auto;
   padding: 25px;
+}
+
+#header {
+  background-color: rgb(65, 206, 152);
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 10px;
+}
+
+.add-icon {
+  float: right;
+  color: white;
+  font-size: 40px;
+}
+
+h1 {
+  color: white;
+  font-family: 'Varela Round', sans-serif;
+  font-size: 45px;
+  padding: 0;
+}
+
+h2 {
+  color: rgb(195, 231, 78);
+  font-family: 'Varela Round', sans-serif;
+  font-size: 18px;
+  padding-bottom: 16px;
+}
+
+.pledge-title {
+  font-family: 'Varela Round', sans-serif;
+  font-size: 24px;
+  color: rgb(65, 206, 152);
+  padding: 8px 0;
+}
+
+.pledge-details {
+  font-family: 'Varela Round', sans-serif;
+  font-size: 18px;
+  color: rgb(105, 105, 105);
+  padding: 8px 0;
+}
+
+p {
+  font-family: 'Varela Round', sans-serif;
+  font-size: 20px;
+}
+
+#pledge-container {
+  display: flex;
+  flex-wrap: wrap;
+  /* border: 1px solid red; */
+}
+
+#pledge {
+  background-color: rgb(255, 255, 255);
+  width: 45%;
+  border-radius: 12px;
+  padding: 25px;
+  margin: 10px;
+}
+
+#footer {
+  text-align: right;
+  margin: 0 auto;
+  color: white;
+  background-color: rgb(65, 206, 152);
+  padding: 25px; 
+  margin-top: 60px;
 }
