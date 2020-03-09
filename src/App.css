@@ -7,7 +7,7 @@
 .app {
   background-color: rgb(195, 231, 78);
   width: 75vw;
-  height: 100vh;
+  /* height: 100vh; */
   margin: 0 auto;
   padding: 25px;
 }
