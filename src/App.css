@@ -81,8 +81,10 @@ p {
   margin-top: 60px;
 }
 
-button{
-  font-size: 18px;
-  padding: 8px;
+#delete {
+  font-size: 2.5em;
+  padding: 6px;
+  color: black;
   cursor: pointer;
+  /* border: 1px solid red; */
 }
