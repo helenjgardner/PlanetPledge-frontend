@@ -19,6 +19,19 @@ class App extends React.Component {
       .catch(err => console.log(err))
   }
 
+  deletePledge = (pledge_id) => {
+    axios.delete("http://localhost:3001/pledges/" + pledge_id)
+      .then(res => {
+        const currentPledges = this.state.pledges.filter(item => {
+          return item.pledge_id !== pledge_id})
+        this.setState({ pledges: currentPledges })
+      })
+      .catch(err => {
+        console.log('error deleting pledge', err)
+      })
+  }
+
+
   render() {
 
     // console.log(this.state.pledges)
@@ -32,12 +45,13 @@ class App extends React.Component {
         <Header />
         <div id="pledge-container">
           {this.state.pledges.map(pledge => {
-            return <Pledge 
-            title={pledge.pledge_title}
-            detail={pledge.pledge_detail}
-            key={pledge.pledge_id}
-            id={pledge.pledge_id}
-            />  
+            return <Pledge
+              title={pledge.pledge_title}
+              detail={pledge.pledge_detail}
+              key={pledge.pledge_id}
+              id={pledge.pledge_id}
+              deleteFunc={this.deletePledge}
+            />
           })}
         </div>
         <Footer />

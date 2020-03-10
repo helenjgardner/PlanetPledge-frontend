@@ -80,3 +80,9 @@ p {
   padding: 25px; 
   margin-top: 60px;
 }
+
+button{
+  font-size: 18px;
+  padding: 8px;
+  cursor: pointer;
+}

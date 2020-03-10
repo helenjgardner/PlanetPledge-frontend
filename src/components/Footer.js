@@ -1,11 +1,13 @@
 import React from 'react';
 
-function Footer() {
-  return (
-    <div id='footer'>
-      <p>this is the footer</p>
-    </div>
-  );
+class Footer extends React.Component {
+  render() {
+    return (
+      <div id='footer'>
+        <p>Created by G to the H</p>
+      </div>
+    );
+  }
 }
 
 export default Footer;
