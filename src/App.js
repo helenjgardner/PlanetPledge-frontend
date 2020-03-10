@@ -12,7 +12,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3001/pledges')
+    axios.get('http://localhost:3002/pledges')
 
       .then(res => {
         this.setState({ pledges: res.data })
@@ -20,8 +20,10 @@ class App extends React.Component {
       .catch(err => console.log(err))
   }
 
+  pledgeCount = () => this.state.pledges.length;
+
   deletePledge = (pledge_id) => {
-    axios.delete("http://localhost:3001/pledges/" + pledge_id)
+    axios.delete("http://localhost:3002/pledges/" + pledge_id)
       .then(res => {
         const currentPledges = this.state.pledges.filter(item => {
           return item.pledge_id !== pledge_id})
@@ -36,7 +38,7 @@ class App extends React.Component {
 
     return (
       <div className='app'>
-        <Header />
+        <Header pledgeCount={this.pledgeCount()} />
         <div id="pledge-container">
           {this.state.pledges.map(pledge => {
             return <Pledge
