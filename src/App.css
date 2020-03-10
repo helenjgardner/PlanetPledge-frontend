@@ -19,10 +19,11 @@
   margin-bottom: 10px;
 }
 
-.add-icon {
+#add-icon {
+  font-size: 3em;
+  padding: 6px;
   float: right;
   color: white;
-  font-size: 40px;
 }
 
 h1 {
