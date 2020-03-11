@@ -87,7 +87,33 @@ p {
   color: black;
   cursor: pointer;
 }
+/* 
+table {
+  
+} */
 
+td {
+  font-family: monospace;
+  font-size: 0.9em;
+  width: 30px;
+  /* border: solid 1px red; */
+}
+
+.pledgeInactive{
+  min-width: 20px;
+  display: inline-block;
+  min-height: 20px;
+  border-radius: 10px;
+  background-color: red;
+}
+
+.pledgeActive{
+  min-width: 20px;
+  display: inline-block;
+  min-height: 20px;
+  border-radius: 10px;
+  background-color: rgb(65, 206, 152);
+}
 
 /* style for AddPledge */
 #add-header {
