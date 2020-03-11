@@ -4,13 +4,12 @@ import './App.css';
 import Header from './components/Header.js';
 import Pledge from './components/Pledge.js';
 import Footer from './components/Footer.js';
-import Modal from './components/Modal'
+import Modal from './components/Modal';
 
 
 class App extends React.Component {
   state = {
-    pledges: [],
-    isModalOpen: false
+    pledges: []
   }
 
   toggleModal = () => {
@@ -58,14 +57,6 @@ class App extends React.Component {
           })}
         </div>
 
-
-        {/* modal */}
-        <div>
-          <button onClick={this.toggleModal}>Open modal dialog</button>
-          <Modal isOpen={this.state.isModalOpen} onClose={this.toggleModal}>
-            <div>I have made a modal!</div>
-          </Modal>
-        </div>
 
 
         <Footer />
