@@ -4,23 +4,17 @@ import './App.css';
 import Header from './components/Header.js';
 import Pledge from './components/Pledge.js';
 import Footer from './components/Footer.js';
-
-
+ 
 class App extends React.Component {
   state = {
     pledges: []
   }
 
-  // toggleModal = () => {
-  //   const { isModalOpen } = this.state;
-  //   this.setState({ isModalOpen: !isModalOpen });
-  // }
-
-  addPledge = () => {
+  addPledge = (newPledgeTitle, newPledgeDetail)  => {
 
     const newPledge = {
-      "pledge_title": "test",
-      "pledge_detail": "instead of driving",
+      "pledge_title": newPledgeTitle,
+      "pledge_detail": newPledgeDetail,
       "pledge_type": "D",
       "username": "HelenG"
     }
