@@ -4,7 +4,6 @@ import './App.css';
 import Header from './components/Header.js';
 import Pledge from './components/Pledge.js';
 import Footer from './components/Footer.js';
-import Modal from './components/Modal';
 
 
 class App extends React.Component {
@@ -15,6 +14,28 @@ class App extends React.Component {
   toggleModal = () => {
     const { isModalOpen } = this.state;
     this.setState({ isModalOpen: !isModalOpen });
+  }
+
+  addPledge = () => {
+
+    const newPledge = {
+      "pledge_title": "test",
+      "pledge_detail": "instead of driving",
+      "pledge_type": "D",
+      "username": "HelenG"
+    }
+
+    axios.post('http://localhost:3002/pledges', newPledge)
+    .then(res => {
+      // console.log(res.data.pledge_id)
+      newPledge.pledge_id = res.data.pledge_id;
+      const pledgeCopy = this.state.pledges.slice();
+      pledgeCopy.push(newPledge);
+      this.setState({ 
+        pledges: pledgeCopy
+      })
+    })
+    .catch(err => console.log(err)) 
   }
 
   componentDidMount() {
@@ -44,7 +65,11 @@ class App extends React.Component {
 
     return (
       <div className='app'>
-        <Header pledgeCount={this.pledgeCount()} showModal={this.toggleModal} />
+        <Header 
+        pledgeCount={this.pledgeCount()} 
+        showModal={this.toggleModal} 
+        addPledgeFunc={this.addPledge}
+        />
         <div id="pledge-container">
           {this.state.pledges.map(pledge => {
             return <Pledge

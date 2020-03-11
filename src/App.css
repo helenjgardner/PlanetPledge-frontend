@@ -24,6 +24,7 @@
   padding: 6px;
   float: right;
   color: white;
+  cursor: pointer;
 }
 
 h1 {
@@ -88,4 +89,12 @@ p {
   color: black;
   cursor: pointer;
   /* border: 1px solid red; */
+}
+
+#add-header {
+  color: rgb(0, 0, 0);
+  font-family: 'Varela Round', sans-serif;
+  font-size: 25px;
+  padding: 0;
+  margin-bottom: 12px;
 }
