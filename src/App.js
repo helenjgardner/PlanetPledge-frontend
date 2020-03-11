@@ -11,10 +11,10 @@ class App extends React.Component {
     pledges: []
   }
 
-  toggleModal = () => {
-    const { isModalOpen } = this.state;
-    this.setState({ isModalOpen: !isModalOpen });
-  }
+  // toggleModal = () => {
+  //   const { isModalOpen } = this.state;
+  //   this.setState({ isModalOpen: !isModalOpen });
+  // }
 
   addPledge = () => {
 
@@ -27,7 +27,6 @@ class App extends React.Component {
 
     axios.post('http://localhost:3002/pledges', newPledge)
     .then(res => {
-      // console.log(res.data.pledge_id)
       newPledge.pledge_id = res.data.pledge_id;
       const pledgeCopy = this.state.pledges.slice();
       pledgeCopy.push(newPledge);

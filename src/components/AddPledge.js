@@ -4,24 +4,31 @@ class AddPledge extends React.Component {
 
   handleAddPledge = e => {
     e.preventDefault()
-    // console.log("clicked")
     this.props.addPledgeFunc()
+    this.props.onClose()
   }
 
   render() {
     return (
       <>
-      <h1 id="add-header">Add a Pledge</h1>
+        <h1 id="add-header">Add a Pledge</h1>
         <form>
-          <label>pledge name:</label>
+          <label className="addPledge-text">I pledge to...</label>
           <input type="text" id="pledge_title"></input>
-          <br /><br />
-          <label>pledge details:</label>
+
+          <label className="addPledge-text">I should do this because....</label>
           <input type="text" id="details"></input>
-          <br /><br />
-          <button onClick={this.handleAddPledge}>add pledge</button>
+
+          <label className="addPledge-text">I will do this</label>
+          <select id="cars">
+            <option value="D">Daily</option>
+            <option value="W">Weekly</option>
+            <option value="C">Continuously</option>
+          </select>
+
+          <button onClick={this.handleAddPledge} id="addPledge-button">add pledge</button>
         </form>
-        
+        <br /><br /><br /><br />
       </>
     );
   }

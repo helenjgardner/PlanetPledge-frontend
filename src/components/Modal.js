@@ -16,16 +16,11 @@ class Modal extends React.Component {
     };
 
     const ModalStyle = {
-      maxWidth: 300,
+      maxWidth: 325,
       minHeight: 200,
       backgroundColor: "#fff",
       margin: "auto",
-      padding: 5
-    };
-
-    const HeaderStyle = {
-      height: 20,
-      width: "100%"
+      padding: 12
     };
 
     const CloseBtnStyle = {
@@ -37,9 +32,9 @@ class Modal extends React.Component {
     return (
       <div style={BackgroundStyle}>
         <div style={ModalStyle}>
-          <div style={HeaderStyle}>
+          <div>
             <span style={CloseBtnStyle} onClick={this.props.onClose}>
-              X
+              <p>X</p>
             </span>
           </div>
           {this.props.children}

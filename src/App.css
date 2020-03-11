@@ -6,8 +6,7 @@
 
 .app {
   background-color: rgb(195, 231, 78);
-  width: 75vw;
-  /* height: 100vh; */
+  width: 85vw;
   margin: 0 auto;
   padding: 25px;
 }
@@ -63,7 +62,6 @@ p {
 #pledge-container {
   display: flex;
   flex-wrap: wrap;
-  /* border: 1px solid red; */
 }
 
 #pledge {
@@ -88,13 +86,39 @@ p {
   padding: 6px;
   color: black;
   cursor: pointer;
-  /* border: 1px solid red; */
 }
 
+
+/* style for AddPledge */
 #add-header {
   color: rgb(0, 0, 0);
   font-family: 'Varela Round', sans-serif;
-  font-size: 25px;
+  font-size: 27px;
   padding: 0;
   margin-bottom: 12px;
+}
+
+.addPledge-text {
+  display: block;
+  font-family: 'Varela Round', sans-serif;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+#addPledge-button {
+  float: right;
+  font-size: 1em;
+  padding: 8px;
+  background-color: rgb(65, 206, 152);
+  color: white;
+  cursor: pointer;
+  border-radius: 6px;
+  border: 0;
+  margin: 19px 0;
+}
+
+input, select {
+  width: 300px;
+  font-size: 18px;
+  margin-bottom: 14px;
 }

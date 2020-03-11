@@ -21,7 +21,7 @@ class Header extends React.Component {
       <div id='header'>
         <FontAwesomeIcon id="add-icon" icon={faPlusCircle} onClick={this.handleClick} />
         <Modal isOpen={this.state.isModalOpen} onClose={this.handleClick}>
-          <AddPledge addPledgeFunc={this.props.addPledgeFunc} />
+          <AddPledge addPledgeFunc={this.props.addPledgeFunc} onClose={this.handleClick}/>
         </Modal>
         <h1>planet pledge</h1>
         <h2>saving the world, one plastic bottle at a time</h2>
