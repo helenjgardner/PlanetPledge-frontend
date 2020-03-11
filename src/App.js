@@ -18,12 +18,30 @@ class App extends React.Component {
       .catch(err => console.log(err))
     axios.get('http://localhost:3002/pledges_status')
       .then(res => {
-        console.log(res.data)
+        const data = res.data;
+        let defaultObj = {
+          pledge_id: null, 
+          "05": false, 
+          "06": false,
+          "07": false,
+          "08": false,
+          "09": false,
+          "10": false,
+          "11": false,
+           };
+        let resultsArr = [];
 
-        // create empty results array
-        // loop through array and get pledge_id and date[8][9]
-        // add to obj  ->  {pledge_id: 30, date: 05}
-        // push obj to results array
+        for (let i = 0; i < data.length; i++) {
+          // console.log(data[i].pledge_id)
+          let currObj = Object.assign({}, defaultObj)
+          console.log(currObj)
+        }
+
+        // for first iteration we add pledge_id to the default obj and the overright relevant day
+        // for each following iteration we check - if pledge_id is still same? if so then:
+          //  overright relevant day 
+        // if pledge_id is not the same we push obj to the results array
+        // [{pledge_id: 30, "05": true, "06": true, "07": true ...}, {pledge_id: 34, "05": true, "06": false, "07": false ...} ]
 
 
 
