@@ -4,16 +4,12 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 class Pledge extends React.Component {
 
-  state = {
-    dailyStatus: [true, false, true, false, false, false, true]
-  }
-
   handleClickDel = () => {
     this.props.deleteFunc(this.props.id);
   }
 
   render() {
-    console.log(this.props.status)
+    // console.log(this.props.status)
     return (
       <div id='pledge'>
         <h3 className='pledge-title'>{this.props.title}</h3>
@@ -30,27 +26,30 @@ class Pledge extends React.Component {
           </tr>
           <tr>
             <td>
-              {this.state.dailyStatus[0] ? <span className="pledgeActive"> </span> : <span className="pledgeInactive">  </span>}
+              {this.props.dailyStatus[0] ? <span className="pledgeActive"> </span> : <span className="pledgeInactive">  </span>}
             </td>
             <td>
-              {this.state.dailyStatus[1] ? <span className="pledgeActive"> </span> : <span className="pledgeInactive">  </span>}
+              {this.props.dailyStatus[1] ? <span className="pledgeActive"> </span> : <span className="pledgeInactive">  </span>}
             </td>
             <td>
-              {this.state.dailyStatus[2] ? <span className="pledgeActive"> </span> : <span className="pledgeInactive">  </span>}
+              {this.props.dailyStatus[2] ? <span className="pledgeActive"> </span> : <span className="pledgeInactive">  </span>}
             </td>
             <td>
-              {this.state.dailyStatus[3] ? <span className="pledgeActive"> </span> : <span className="pledgeInactive">  </span>}
+              {this.props.dailyStatus[3] ? <span className="pledgeActive"> </span> : <span className="pledgeInactive">  </span>}
             </td>
             <td>
-              {this.state.dailyStatus[4] ? <span className="pledgeActive"> </span> : <span className="pledgeInactive">  </span>}
+              {this.props.dailyStatus[4] ? <span className="pledgeActive"> </span> : <span className="pledgeInactive">  </span>}
             </td>
             <td>
-              {this.state.dailyStatus[5] ? <span className="pledgeActive"> </span> : <span className="pledgeInactive">  </span>}
+              {this.props.dailyStatus[5] ? <span className="pledgeActive"> </span> : <span className="pledgeInactive">  </span>}
             </td>
             <td>
-              {this.state.dailyStatus[6] ? <span className="pledgeActive"> </span> : <span className="pledgeInactive">  </span>}
+              {this.props.dailyStatus[6] ? <span className="pledgeActive"> </span> : <span className="pledgeInactive">  </span>}
             </td>
           </tr>
+          {/* <tr>
+            <td colspan="7"><p>{this.props.status}</p></td>
+          </tr> */}
           </tbody>
         </table>
         <FontAwesomeIcon icon={faTrash} id="delete" onClick={this.handleClickDel} />

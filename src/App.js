@@ -8,7 +8,7 @@ import Footer from './components/Footer.js';
 class App extends React.Component {
   state = {
     pledges: [],
-    tempPledge:[]
+    tempPledge: []
   }
   componentDidMount() {
     axios.get('http://localhost:3002/pledges')
@@ -21,13 +21,13 @@ class App extends React.Component {
         const data = res.data;
         let defaultObj = {
           pledge_id: null,
-          "05": false,
-          "06": false,
-          "07": false,
-          "08": false,
-          "09": false,
-          "10": false,
-          "11": false,
+          "14": false,
+          "15": false,
+          "16": false,
+          "17": false,
+          "18": false,
+          "19": false,
+          "20": false,
         };
         let resultsArr = [];
         let currObj = Object.assign({}, defaultObj)
@@ -49,17 +49,56 @@ class App extends React.Component {
         }
         // console.log(Object.values(resultsArr[0]));
         // console.log(Object.keys(resultsArr[0]));
-        // console.log(Object.entries(resultsArr[0]));
+
+
+
+
+        console.log("original resultsArr", resultsArr)
+
+        // get todays date and extract the day (11)
+        // let today = new Date().getDate()
+        let today=20;
+        console.log(today)
+        // create weekToDisplay empty array
+        let weekToDisplay = [];
+        // for each object on the resultsArr look for a key = 11
+        resultsArr.map(p => {
+          let insideArr = []
+          insideArr.push(p.pledge_id)
+          // console.log(p)
+          let compareDate = today;
+          for (let l = 0; l < 7; l++) {
+            compareDate = (today - l).toString();
+            if (p[compareDate]) {
+              insideArr.push(true)
+            } else {
+              insideArr.push(false)
+            }
+          }
+          weekToDisplay.push(insideArr)
+
+        })
+        // console.log(weekToDisplay)
+        // if found we push true to weekToDisplay [ true ]
+        // else if not found push false
+
+
+
+        // console.log(Object.entries(resultsArr));
+        // const result = resultsArr.map(el => Object.entries(el)).sort((a,b) => a[0] - b[0])
+        // console.log(result)
+
         const allPledges = this.state.tempPledge;
-        for (let j=0; j< allPledges.length; j++){
-          for (let k=0; k<resultsArr.length; k++){
-            let pID=resultsArr[k].pledge_id;
+        for (let j = 0; j < allPledges.length; j++) {
+          for (let k = 0; k < weekToDisplay.length; k++) {
+            let pID = weekToDisplay[k][0];
             let origPD = allPledges[j].pledge_id;
-             if (pID === origPD) {
-              allPledges[j].daily_status = Object.entries(resultsArr[k])
-             }
+            if (pID === origPD) {
+              allPledges[j].daily_status = weekToDisplay[k].slice(1)
+            }
           }
         }
+        console.log(allPledges)
         this.setState({
           pledges: allPledges
         })
@@ -119,7 +158,7 @@ class App extends React.Component {
               detail={pledge.pledge_detail}
               key={pledge.pledge_id}
               id={pledge.pledge_id}
-              status={pledge.daily_status}
+              dailyStatus={pledge.daily_status}
               deleteFunc={this.deletePledge}
 
             />
