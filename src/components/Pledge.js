@@ -13,7 +13,7 @@ class Pledge extends React.Component {
   }
 
   render() {
-
+    console.log(this.props.status)
     return (
       <div id='pledge'>
         <h3 className='pledge-title'>{this.props.title}</h3>
