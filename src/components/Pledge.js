@@ -9,7 +9,6 @@ class Pledge extends React.Component {
   }
 
   render() {
-    // console.log(this.props.status)
     return (
       <div id='pledge'>
         <h3 className='pledge-title'>{this.props.title}</h3>
@@ -47,9 +46,6 @@ class Pledge extends React.Component {
               {this.props.dailyStatus[6] ? <span className="pledgeActive"> </span> : <span className="pledgeInactive">  </span>}
             </td>
           </tr>
-          {/* <tr>
-            <td colspan="7"><p>{this.props.status}</p></td>
-          </tr> */}
           </tbody>
         </table>
         <FontAwesomeIcon icon={faTrash} id="delete" onClick={this.handleClickDel} />
