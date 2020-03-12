@@ -7,7 +7,8 @@ import Footer from './components/Footer.js';
 
 class App extends React.Component {
   state = {
-    pledges: []
+    pledges: [],
+    pledge_status:[]
   }
 
   componentDidMount() {
@@ -34,12 +35,12 @@ class App extends React.Component {
         currObj.pledge_id = data[0].pledge_id
         for (let i = 0; i < data.length; i++) {
           if (data[i].pledge_id === currObj.pledge_id) {
-            const day = data[i].pledge_date.slice(8, 10) // 05 , 06 , ....
-            currObj[day] = true  // "05": true, "06": true ...
+            const day = data[i].pledge_date.slice(8, 10) 
+            currObj[day] = true  
           } else {
-            resultsArr.push(currObj)  // [ {pledge_id: 30, "05": true, "06": true, "07": true ...}, ] 
+            resultsArr.push(currObj)  
 
-            currObj = Object.assign({}, defaultObj) // default object
+            currObj = Object.assign({}, defaultObj) 
             currObj.pledge_id = data[i].pledge_id
             const day = data[i].pledge_date.slice(8, 10)
             currObj[day] = true
@@ -48,14 +49,12 @@ class App extends React.Component {
             resultsArr.push(currObj)
           }
         }
-        console.log(resultsArr) //  {10: true, 11: true, pledge_id: 34, 05: true, 06: true, 07: true, 08: true, …}
-
-
-
-        // this.generateDailyStatusArray()
-        // this.setState({ pledges: res.data })
-      })
+        // console.log(resultsArr) //  {10: true, 11: true, pledge_id: 34, 05: true, 06: true, 07: true, 08: true, …}
+        this.setState({ pledge_status: resultsArr })  
+      })      
       .catch(err => console.log(err))
+      
+      // this.addStatusToPledge();
   }
 
   pledgeCount = () => this.state.pledges.length;
@@ -92,8 +91,27 @@ class App extends React.Component {
       })
   }
 
-  render() {
+  addStatusToPledge = () =>{
 
+    let allPledges=this.state.pledges.slice();
+    for (let j=0; j< allPledges.length; j++){
+
+      for (let k=0; k<this.state.pledge_status.length; k++){
+         let pID=this.state.pledge_status[k].pledge_id;
+         let origPD = allPledges[j].pledge_id;
+         if (pID === origPD) { allPledges[j].daily_status = this.state.pledge_status[k] }
+
+      }
+      console.log(allPledges)
+
+      
+    }
+    
+    // this.setState({ pledges: allPledges })
+  }
+
+  render() {
+    this.addStatusToPledge();
     return (
       <div className='app'>
         <Header
@@ -109,6 +127,7 @@ class App extends React.Component {
               key={pledge.pledge_id}
               id={pledge.pledge_id}
               deleteFunc={this.deletePledge}
+
             />
           })}
         </div>
