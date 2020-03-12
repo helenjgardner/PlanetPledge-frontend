@@ -20,28 +20,35 @@ class App extends React.Component {
       .then(res => {
         const data = res.data;
         let defaultObj = {
-          pledge_id: null, 
-          "05": false, 
+          pledge_id: null,
+          "05": false,
           "06": false,
           "07": false,
           "08": false,
           "09": false,
           "10": false,
           "11": false,
-           };
+        };
         let resultsArr = [];
-
+        let currObj = Object.assign({}, defaultObj)
+        currObj.pledge_id = data[0].pledge_id
         for (let i = 0; i < data.length; i++) {
-          // console.log(data[i].pledge_id)
-          let currObj = Object.assign({}, defaultObj)
-          console.log(currObj)
-        }
+          if (data[i].pledge_id === currObj.pledge_id) {
+            const day = data[i].pledge_date.slice(8, 10) // 05 , 06 , ....
+            currObj[day] = true  // "05": true, "06": true ...
+          } else {
+            resultsArr.push(currObj)  // [ {pledge_id: 30, "05": true, "06": true, "07": true ...}, ] 
 
-        // for first iteration we add pledge_id to the default obj and the overright relevant day
-        // for each following iteration we check - if pledge_id is still same? if so then:
-          //  overright relevant day 
-        // if pledge_id is not the same we push obj to the results array
-        // [{pledge_id: 30, "05": true, "06": true, "07": true ...}, {pledge_id: 34, "05": true, "06": false, "07": false ...} ]
+            currObj = Object.assign({}, defaultObj) // default object
+            currObj.pledge_id = data[i].pledge_id
+            const day = data[i].pledge_date.slice(8, 10)
+            currObj[day] = true
+          }
+          if (i === data.length - 1) {
+            resultsArr.push(currObj)
+          }
+        }
+        console.log(resultsArr) //  {10: true, 11: true, pledge_id: 34, 05: true, 06: true, 07: true, 08: true, …}
 
 
 
