@@ -11,14 +11,24 @@ class App extends React.Component {
     tempPledge: []
   }
   componentDidMount() {
+    // get all pledges out of pledges table and put in temporary state
+    // this is because we couldnt work out how to update state twice 
+    // gets pledge_id, title, details per pledge
     axios.get('http://localhost:3002/pledges')
       .then(res => {
         this.setState({ tempPledge: res.data })
       })
       .catch(err => console.log(err))
+    // second call to get data out of pledge_status table
+    // table joins on pledge_id, contains date and status
+    // status is always true, if an activity didnt happen on a day there is no row
+    // api has an order by pledge_id, date
     axios.get('http://localhost:3002/pledges_status')
       .then(res => {
         const data = res.data;
+        // a default template object that populates missing days with false
+        // hardcoded values need sorting, we just set it to run on 20th of month
+        // need it to be actual date values
         let defaultObj = {
           pledge_id: null,
           "14": false,
@@ -29,33 +39,53 @@ class App extends React.Component {
           "19": false,
           "20": false,
         };
+        // an empty array that will hold final outcome
         let resultsArr = [];
+        // start with a copy of our default object
         let currObj = Object.assign({}, defaultObj)
+        // set pledge id to be first pledge id
         currObj.pledge_id = data[0].pledge_id
         for (let i = 0; i < data.length; i++) {
+          // if current iteration (i) pledge id matches current object then we are still on same pledge
+          // obviously for first run it will  match
           if (data[i].pledge_id === currObj.pledge_id) {
+            // overwrite day with true
             const day = data[i].pledge_date.slice(8, 10)
             currObj[day] = true
           } else {
+            // we are onto a new pledge so push the old current obj to results array
+            // reset current object from our default template
+            // do the normal stuff of setting pledge id and overwriting day
             resultsArr.push(currObj)
             currObj = Object.assign({}, defaultObj)
             currObj.pledge_id = data[i].pledge_id
             const day = data[i].pledge_date.slice(8, 10)
             currObj[day] = true
           }
+          // if we get to the end then we need to push current obj to results array
           if (i === data.length - 1) {
             resultsArr.push(currObj)
           }
         }
-
         console.log("original resultsArr", resultsArr)
-        let today=20;
-        console.log(today)
+
+        let today = 20; // hardcoded for now
+
+        // an array of arrays
+        // subarray for each pledge
+        // will hold pledgeid then 7 values either true or false in ascending order
         let weekToDisplay = [];
+        // for each element in array which corresponds to pledge
         resultsArr.map(p => {
           let insideArr = []
+          // create an array, make first element pledgid
           insideArr.push(p.pledge_id)
+
           let compareDate = today;
+          // for each date between today and 7 days ago
+          // check if key value pair exists in object
+          // write to array accordingly
+
           for (let l = 0; l < 7; l++) {
             compareDate = (today - l).toString();
             if (p[compareDate]) {
@@ -65,19 +95,22 @@ class App extends React.Component {
             }
           }
           weekToDisplay.push(insideArr)
+          return weekToDisplay;
 
         })
+        // create proper state for all pledges with status bunged in
         const allPledges = this.state.tempPledge;
+        // for all the pledges
         for (let j = 0; j < allPledges.length; j++) {
+          // loop through all of the weektodisplays until find right one for pledge
           for (let k = 0; k < weekToDisplay.length; k++) {
-            let pID = weekToDisplay[k][0];
-            let origPD = allPledges[j].pledge_id;
-            if (pID === origPD) {
+            if (weekToDisplay[k][0] === allPledges[j].pledge_id) {
               allPledges[j].daily_status = weekToDisplay[k].slice(1)
             }
           }
+          // if no rows in pledge status table pop blanks Helen added 16th to make adding pledge work
+          if (!allPledges[j].daily_status) allPledges[j].daily_status=[false,false,false,false,false,false,false]
         }
-        console.log(allPledges)
         this.setState({
           pledges: allPledges
         })
@@ -92,7 +125,9 @@ class App extends React.Component {
       "pledge_title": newPledgeTitle,
       "pledge_detail": newPledgeDetail,
       "pledge_type": "D",
-      "username": "HelenG"
+      "username": "HelenG",
+      // Helen added Mon 16th so that add button would work
+      "daily_status": [false, false, false, false, false, false, false]
     }
     axios.post('http://localhost:3002/pledges', newPledge)
       .then(res => {
