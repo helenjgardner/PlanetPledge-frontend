@@ -39,6 +39,21 @@ class App extends React.Component {
           "19": false,
           "20": false,
         };
+
+        // let arr=[];
+        // let newObj={};
+        //     let current_datetime = new Date();
+        //     arr.push(current_datetime.toISOString().slice(0,10));
+        //     newObj[current_datetime.toISOString().slice(0,10)]=false;
+        //     let minusDate=new Date();
+            
+        //     for (let i=1; i<7; i++){
+        //     minusDate.setDate(current_datetime.getDate()-i);
+        //     arr.push(minusDate.toISOString().slice(0,10));
+        //     newObj[minusDate.toISOString().slice(0,10)]=false;
+        //     }
+
+
         // an empty array that will hold final outcome
         let resultsArr = [];
         // start with a copy of our default object
